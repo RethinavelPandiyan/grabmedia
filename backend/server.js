@@ -28,7 +28,7 @@ if (!fs.existsSync(DOWNLOADS_DIR)) fs.mkdirSync(DOWNLOADS_DIR, { recursive: true
 
 // ── yt-dlp setup ──────────────────────────────────────────────────────────────
 // yt-dlp binary: either installed system-wide or downloaded automatically
-const ytDlp = new YTDlpWrap("E:\\grabmedia\\backend\\yt-dlp.exe");
+const ytDlp = new YTDlpWrap("/usr/local/bin/yt-dlp");
 
 // Auto-download yt-dlp binary if missing (first run)
 async function ensureYtDlp() {

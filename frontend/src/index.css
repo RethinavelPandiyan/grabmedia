@@ -1,0 +1,55 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+
+  --bg: #0a0a0f;
+  --bg-surface: #111118;
+  --bg-card: #16161f;
+  --bg-elevated: #1e1e2a;
+  --border: rgba(255,255,255,0.07);
+  --border-hover: rgba(255,255,255,0.14);
+
+  --text-primary: #f0f0f5;
+  --text-secondary: #8888a8;
+  --text-muted: #55556a;
+
+  --accent-ig: #e1306c;
+  --accent-reel: #833ab4;
+  --accent-story: #f09040;
+  --accent-yt: #ff0000;
+  --accent-tiktok: #69c9d0;
+  --accent-twitter: #1da1f2;
+
+  --grad-ig: linear-gradient(135deg, #f09040 0%, #e1306c 45%, #833ab4 100%);
+  --grad-subtle: linear-gradient(135deg, rgba(225,48,108,0.08) 0%, rgba(131,58,180,0.08) 100%);
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+}
+
+html, body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgba(225,48,108,0.3);
+  color: #fff;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 3px; }

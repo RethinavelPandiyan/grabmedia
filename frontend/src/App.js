@@ -431,7 +431,7 @@ export default function App() {
     setError(null);
     setInfo(null);
     try {
-      const res = await fetch(`https://grabmedia.onrender.com/api/info?url=${encodeURIComponent(trimmed)}`);
+      const res = await fetch(`https://grabmedia-backend-7eqo.onrender.com/api/info?url=${encodeURIComponent(trimmed)}`);
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Failed to fetch info");
       setInfo(data);
@@ -446,7 +446,7 @@ export default function App() {
     const key = formatId || (forceAudio ? "audio" : "best");
     setDownloading(key);
     try {
-      const res = await fetch("https://grabmedia.onrender.com/api/download", {
+      const res = await fetch("https://grabmedia-backend-7eqo.onrender.com/api/download", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url: url.trim(), format_id: formatId, audio_only: forceAudio || audioOnly }),

@@ -35,7 +35,7 @@ const ytDlp = new YTDlpWrap();
 async function ensureYtDlp() {
   try {
     execSync("pip3 install yt-dlp --break-system-packages", { stdio: "inherit" });
-    ytDlp.setBinaryPath("yt-dlp");
+    ytDlp.setBinaryPath("/opt/render/.local/bin/yt-dlp");
     console.log("✅ yt-dlp ready via pip");
   } catch (e) {
     console.error("❌ yt-dlp error:", e.message);

@@ -28,15 +28,15 @@ if (!fs.existsSync(DOWNLOADS_DIR)) fs.mkdirSync(DOWNLOADS_DIR, { recursive: true
 
 // ── yt-dlp setup ──────────────────────────────────────────────────────────────
 // yt-dlp binary: either installed system-wide or downloaded automatically
+const { execSync } = require("child_process");
 const ytDlp = new YTDlpWrap();
 
 // Auto-download yt-dlp binary if missing (first run)
 async function ensureYtDlp() {
   try {
-    const binaryPath = path.join(__dirname, "yt-dlp");
-    await YTDlpWrap.downloadFromGithub(binaryPath);
-    ytDlp.setBinaryPath(binaryPath);
-    console.log("✅ yt-dlp ready");
+    execSync("pip3 install yt-dlp", { stdio: "inherit" });
+    ytDlp.setBinaryPath("yt-dlp");
+    console.log("✅ yt-dlp ready via pip");
   } catch (e) {
     console.error("❌ yt-dlp error:", e.message);
   }

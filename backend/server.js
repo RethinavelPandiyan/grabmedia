@@ -28,7 +28,7 @@ if (!fs.existsSync(DOWNLOADS_DIR)) fs.mkdirSync(DOWNLOADS_DIR, { recursive: true
 
 // ── yt-dlp setup ──────────────────────────────────────────────────────────────
 // yt-dlp binary: either installed system-wide or downloaded automatically
-const ytDlp = new YTDlpWrap("/usr/local/bin/yt-dlp");
+const ytDlp = new YTDlpWrap();
 
 // Auto-download yt-dlp binary if missing (first run)
 async function ensureYtDlp() {
@@ -36,7 +36,16 @@ async function ensureYtDlp() {
     await ytDlp.getVersion();
     console.log("✅ yt-dlp ready");
   } catch {
-    console.log("⚠️  yt-dlp not found in PATH, trying system install...");
+    console.log("⬇  Downloading yt-dlp binary...");
+    try {
+      await YTDlpWrap.downloadFromGithub(
+        path.join(__dirname, "yt-dlp")
+      );
+      ytDlp.setBinaryPath(path.join(__dirname, "yt-dlp"));
+      console.log("✅ yt-dlp downloaded and ready");
+    } catch (e) {
+      console.error("❌ Failed to download yt-dlp:", e.message);
+    }
   }
 }
 

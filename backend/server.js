@@ -10,7 +10,7 @@ const RAPIDAPI_KEY = process.env.RAPIDAPI_KEY || "1ac290f871msh1a1eb3b307fa82ep1
 
 app.use(helmet());
 app.use(cors({ origin: "*" }));
-app.use(express.json());
+app.set("trust proxy", 1);
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,

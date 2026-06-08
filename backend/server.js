@@ -33,19 +33,12 @@ const ytDlp = new YTDlpWrap();
 // Auto-download yt-dlp binary if missing (first run)
 async function ensureYtDlp() {
   try {
-    await ytDlp.getVersion();
+    const binaryPath = path.join(__dirname, "yt-dlp");
+    await YTDlpWrap.downloadFromGithub(binaryPath);
+    ytDlp.setBinaryPath(binaryPath);
     console.log("✅ yt-dlp ready");
-  } catch {
-    console.log("⬇  Downloading yt-dlp binary...");
-    try {
-      await YTDlpWrap.downloadFromGithub(
-        path.join(__dirname, "yt-dlp")
-      );
-      ytDlp.setBinaryPath(path.join(__dirname, "yt-dlp"));
-      console.log("✅ yt-dlp downloaded and ready");
-    } catch (e) {
-      console.error("❌ Failed to download yt-dlp:", e.message);
-    }
+  } catch (e) {
+    console.error("❌ yt-dlp error:", e.message);
   }
 }
 

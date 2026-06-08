@@ -34,7 +34,7 @@ const ytDlp = new YTDlpWrap();
 // Auto-download yt-dlp binary if missing (first run)
 async function ensureYtDlp() {
   try {
-    execSync("pip3 install yt-dlp", { stdio: "inherit" });
+    execSync("pip3 install yt-dlp --break-system-packages", { stdio: "inherit" });
     ytDlp.setBinaryPath("yt-dlp");
     console.log("✅ yt-dlp ready via pip");
   } catch (e) {

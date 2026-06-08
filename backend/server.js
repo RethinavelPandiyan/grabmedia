@@ -48,7 +48,7 @@ async function getInstagramInfo(url) {
   const options = {
     method: "GET",
     hostname: "instagram-downloader-scraper-reels-igtv-posts-stories.p.rapidapi.com",
-    path: `/scraper?url=${encodeURIComponent(url)}`,
+    path: `/v1/scraper?url=${encodeURIComponent(url)}`,
     headers: {
       "x-rapidapi-host": "instagram-downloader-scraper-reels-igtv-posts-stories.p.rapidapi.com",
       "x-rapidapi-key": RAPIDAPI_KEY,

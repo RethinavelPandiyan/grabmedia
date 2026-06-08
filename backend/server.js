@@ -58,18 +58,20 @@ async function getInstagramInfo(url) {
   console.log("Instagram API response:", JSON.stringify(data).slice(0, 500));
   if (!data || data.error) throw new Error(data?.error || "Failed");
 
+  const mediaUrl = data?.data?.[0]?.media || data?.url || data?.video_url || null;
+  const thumbnail = data?.data?.[0]?.thumbnail || data?.thumbnail || null;
   return {
-    title: data?.title || data?.caption || "Instagram Media",
-    thumbnail: data?.thumbnail || data?.cover || data?.image || null,
-    duration: data?.duration || null,
-    uploader: data?.author || data?.username || null,
+    title: data?.caption || data?.title || "Instagram Media",
+    thumbnail: thumbnail,
+    duration: null,
+    uploader: data?.username || null,
     view_count: null,
     like_count: null,
     platform: "instagram",
-    directUrl: data?.url || data?.video_url || data?.download_url || null,
-    formats: [
+    directUrl: mediaUrl,
+    formats: mediaUrl ? [
       { format_id: "video", ext: "mp4", quality: "Best", resolution: null, filesize: null, vcodec: "h264", acodec: "aac" }
-    ],
+    ] : [],
   };
 }
 

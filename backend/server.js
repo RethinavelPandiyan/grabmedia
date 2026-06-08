@@ -55,25 +55,20 @@ async function getInstagramInfo(url) {
     },
   };
   const data = await rapidRequest(options);
+  console.log("Instagram API response:", JSON.stringify(data).slice(0, 500));
   if (!data || data.error) throw new Error(data?.error || "Failed");
 
-  const media = data.data || data;
-  const videoUrl = media?.video_url || media?.media?.[0]?.url || null;
-  const imageUrl = media?.thumbnail || media?.display_url || null;
-
   return {
-    title: media?.caption || "Instagram Media",
-    thumbnail: imageUrl,
-    duration: null,
-    uploader: media?.owner?.username || null,
-    view_count: media?.video_view_count || null,
-    like_count: media?.edge_media_preview_like?.count || null,
+    title: data?.title || data?.caption || "Instagram Media",
+    thumbnail: data?.thumbnail || data?.cover || data?.image || null,
+    duration: data?.duration || null,
+    uploader: data?.author || data?.username || null,
+    view_count: null,
+    like_count: null,
     platform: "instagram",
-    directUrl: videoUrl || imageUrl,
-    formats: videoUrl ? [
+    directUrl: data?.url || data?.video_url || data?.download_url || null,
+    formats: [
       { format_id: "video", ext: "mp4", quality: "Best", resolution: null, filesize: null, vcodec: "h264", acodec: "aac" }
-    ] : [
-      { format_id: "image", ext: "jpg", quality: "Original", resolution: null, filesize: null, vcodec: "none", acodec: "none" }
     ],
   };
 }
